@@ -5,13 +5,13 @@
 #include "sorts.h"
 
 //Insertion
-void insertionSort(int* vet, long int tam, DadosAmostra* dado)
+void insertion_sort(int* vet, long int tam, DadosAmostra* dado)
 {
 	int i, j, chave;
 	clock_t tempo1, tempo2;
 
-	printf("comps no insertion: %lld\n", dado->num_comparacoes);
-	printf("trocas no insertion: %lld\n", dado->num_trocas);
+	//printf("comps no insertion: %lld\n", dado->num_comparacoes);
+	//printf("trocas no insertion: %lld\n", dado->num_trocas);
 
 	tempo1 = clock();
 
@@ -33,12 +33,12 @@ void insertionSort(int* vet, long int tam, DadosAmostra* dado)
 
 	dado->tempo_de_execucao = (double)(tempo2 - tempo1) / CLOCKS_PER_SEC;
 
-	printf("comps no insertion: %lld\n", dado->num_comparacoes);
-	printf("trocas no insertion: %lld\n", dado->num_trocas);
+	//printf("comps no insertion: %lld\n", dado->num_comparacoes);
+	//printf("trocas no insertion: %lld\n", dado->num_trocas);
 }
 
 //Selection
-void selectionSort(int* vet, int long tam, DadosAmostra* dado)
+void selection_sort(int* vet, int long tam, DadosAmostra* dado)
 {
 	int i, j, min, aux;
 	clock_t tempo1, tempo2;
@@ -66,11 +66,11 @@ void selectionSort(int* vet, int long tam, DadosAmostra* dado)
 }
 
 //Merge
-void mergeSort(int* vet, int comeco, int fim, DadosAmostra* dados) {
+void merge_sort(int* vet, int comeco, int fim, DadosAmostra* dados) {
 	int meio = (fim + comeco) / 2;
 	if (comeco < fim) {
-		mergeSort(vet, comeco, meio, dados);
-		mergeSort(vet, meio + 1, fim, dados);
+		merge_sort(vet, comeco, meio, dados);
+		merge_sort(vet, meio + 1, fim, dados);
 		intercala(vet, comeco, meio, fim, dados);
 	}
 
@@ -113,12 +113,12 @@ void intercala(int* vet, int comeco, int meio, int fim, DadosAmostra* dados) {
 }
 
 //Heap
-void heapSort(int* vet, long int tam, DadosAmostra* dados)
+void heap_sort(int* vet, long int tam, DadosAmostra* dados)
 {
 	int i, aux;
 
 	for (i = tam / 2 - 1; i >= 0; i--) {
-		maxHeapify(vet, tam, i, dados);
+		max_heapify(vet, tam, i, dados);
 	}
 
 	for (i = tam - 1; i >= 0; i--) {
@@ -127,11 +127,11 @@ void heapSort(int* vet, long int tam, DadosAmostra* dados)
 		vet[i] = aux;
 
 		dados->num_trocas++;
-		maxHeapify(vet, i, 0, dados);
+		max_heapify(vet, i, 0, dados);
 	}
 }
 
-void maxHeapify(int* vet, long int tam, int i, DadosAmostra* dados)
+void max_heapify(int* vet, long int tam, int i, DadosAmostra* dados)
 {
 	int aux;
 	int maior = i;
@@ -155,27 +155,27 @@ void maxHeapify(int* vet, long int tam, int i, DadosAmostra* dados)
 		vet[maior] = aux;
 
 		dados->num_trocas++;
-		maxHeapify(vet, tam, maior, dados);
+		max_heapify(vet, tam, maior, dados);
 	}
 }
 
 //Quick
-void quickSort(int* vet, int p, long int r, DadosAmostra* dados)
+void quick_sort(int* vet, int p, long int r, DadosAmostra* dados)
 {
 	int q;
 
 
 	if (p < r) {
 		q = partition(vet, p, r, dados);
-		quickSort(vet, p, q - 1, dados);
-		quickSort(vet, q + 1, r, dados);
+		quick_sort(vet, p, q - 1, dados);
+		quick_sort(vet, q + 1, r, dados);
 	}
 }
 
 int partition(int* vet, int p, long int r, DadosAmostra* dados)
 {
 	int aux;
-	int x = vet[r]; // pivo
+	int x = vet[r]; // pivô
 	int i = p - 1, j;
 
 	for (j = p; j <= r - 1; j++) {

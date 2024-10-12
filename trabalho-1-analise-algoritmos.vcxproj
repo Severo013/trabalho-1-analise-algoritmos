@@ -128,10 +128,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="auxiliar.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sorts.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="auxiliar.h" />
     <ClInclude Include="sorts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
