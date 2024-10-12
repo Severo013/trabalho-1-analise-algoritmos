@@ -78,7 +78,9 @@ void merge_sort(int* vet, int comeco, int fim, DadosAmostra* dados) {
 }
 
 void intercala(int* vet, int comeco, int meio, int fim, DadosAmostra* dados) {
-	int* temp = (int*)malloc(sizeof(fim - comeco + 1));
+	
+	int* temp = (int*)malloc((fim - comeco + 1) * sizeof(int));
+
 	int pos = 0, pos_comeco = comeco, pos_final = meio + 1;
 
 	while (pos_comeco <= meio && pos_final <= fim) {
@@ -109,6 +111,7 @@ void intercala(int* vet, int comeco, int meio, int fim, DadosAmostra* dados) {
 		vet[i + comeco] = temp[i];
 	}
 
+	free(temp);
 	return;
 }
 

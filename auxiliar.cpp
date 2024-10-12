@@ -8,10 +8,6 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 {
 	DadosSort estats;
 
-	//for (i = 0; i < tamAmostra; i++) {
-	//	printf("n_comp[%d]: %lld\n\n", i, dados[i].num_comparacoes);
-	//}
-
 	estats.tempo_de_execucao.media = 0;
 	estats.tempo_de_execucao.desvio_padrao = 0;
 	estats.tempo_de_execucao.variancia = 0;
@@ -22,12 +18,10 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_comparacoes.desvio_padrao = 0;
 	estats.num_comparacoes.variancia = 0;
 
+	// Calculos das médias
 	for (int i = 0; i < tamAmostra; i++) {
-		/* ************ MEDIA ************* */
 		estats.tempo_de_execucao.media += dados[i].tempo_de_execucao;
-
 		estats.num_trocas.media += dados[i].num_trocas;
-
 		estats.num_comparacoes.media += dados[i].num_comparacoes;
 	}
 
@@ -35,12 +29,10 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_trocas.media /= tamAmostra;
 	estats.num_comparacoes.media /= tamAmostra;
 
+	// Calculos das variâncias e desvios padrão 
 	for (int i = 0; i < tamAmostra; i++) {
-		/* ************ VARIANCIA E DESVIO ************* */
 		estats.tempo_de_execucao.variancia += pow((dados[i].tempo_de_execucao - estats.tempo_de_execucao.media), 2);
-
 		estats.num_trocas.variancia += pow((dados[i].num_trocas - estats.num_trocas.media), 2);
-
 		estats.num_comparacoes.variancia += pow((dados[i].num_comparacoes - estats.num_comparacoes.media), 2);
 	}
 
