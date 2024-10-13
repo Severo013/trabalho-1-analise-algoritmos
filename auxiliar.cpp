@@ -48,15 +48,23 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	return estats;
 }
 
-int* gera_vetor(long int tam)
-{
-	int i;
+int* cria_vetor(long int tam) {
 	int* vet = (int*)malloc(sizeof(int) * tam);
-
-	for (i = 0; i < tam; i++)
-		vet[i] = rand() % 100;
-
 	return vet;
+}
+
+void gera_vetor(long int tam, int* vet)
+{
+	long int i;
+	for (i = 0; i < tam; i++) {
+		vet[i] = rand() % 100;
+	}
+}
+
+void copy_vetor(long int tam, int* vet_origem, int* vet_destino) {
+	long int i;
+	for (i = 0; i < tam; i++)
+		vet_destino[i] = vet_origem[i];
 }
 
 void print_vetor(int* vet, long int tam)

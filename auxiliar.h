@@ -3,7 +3,9 @@
 #include "sorts.h"
 
 //============== Auxiliares ==============//
-int* gera_vetor(long int tam);
+int* cria_vetor(long int tam);
+void gera_vetor(long int tam, int* vet);
+void copy_vetor(long int tam, int* vet_origem, int* vet_destino);
 void print_vetor(int* vet, long int tam);
 void print_dados_sort(DadosSort dados);
 void print_linha_tabela_dados_sort(DadosSort dados);
