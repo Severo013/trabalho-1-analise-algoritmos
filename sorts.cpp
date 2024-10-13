@@ -30,6 +30,9 @@ void insertion_sort(int* vet, long int tam, DadosAmostra* dado)
 	}
 
 	tempo2 = clock();
+	printf("\nCLOCK, tempo1: %ld", tempo1);
+	printf("\nCLOCK, tempo2: %ld", tempo2);
+	printf("\nCLOCK, CLOCKS_PER_SEC: %ld", CLOCKS_PER_SEC);
 
 	dado->tempo_de_execucao = (double)(tempo2 - tempo1) / CLOCKS_PER_SEC;
 
@@ -178,7 +181,7 @@ void quick_sort(int* vet, int p, long int r, DadosAmostra* dados)
 int partition(int* vet, int p, long int r, DadosAmostra* dados)
 {
 	int aux;
-	int x = vet[r]; // pivô
+	int x = vet[r]; // pivï¿½
 	int i = p - 1, j;
 
 	for (j = p; j <= r - 1; j++) {

@@ -18,7 +18,7 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_comparacoes.desvio_padrao = 0;
 	estats.num_comparacoes.variancia = 0;
 
-	// Calculos das médias
+	// Calculos das mÃ©dias
 	for (int i = 0; i < tamAmostra; i++) {
 		estats.tempo_de_execucao.media += dados[i].tempo_de_execucao;
 		estats.num_trocas.media += dados[i].num_trocas;
@@ -29,7 +29,7 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_trocas.media /= tamAmostra;
 	estats.num_comparacoes.media /= tamAmostra;
 
-	// Calculos das variâncias e desvios padrão 
+	// Calculos das variÃ¢ncias e desvios padrÃ£o 
 	for (int i = 0; i < tamAmostra; i++) {
 		estats.tempo_de_execucao.variancia += pow((dados[i].tempo_de_execucao - estats.tempo_de_execucao.media), 2);
 		estats.num_trocas.variancia += pow((dados[i].num_trocas - estats.num_trocas.media), 2);
@@ -48,15 +48,23 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	return estats;
 }
 
-int* gera_vetor(long int tam)
-{
-	int i;
+int* cria_vetor(long int tam) {
 	int* vet = (int*)malloc(sizeof(int) * tam);
-
-	for (i = 0; i < tam; i++)
-		vet[i] = rand() % 100;
-
 	return vet;
+}
+
+void gera_vetor(long int tam, int* vet)
+{
+	long int i;
+	for (i = 0; i < tam; i++) {
+		vet[i] = rand() % 100;
+	}
+}
+
+void copy_vetor(long int tam, int* vet_origem, int* vet_destino) {
+	long int i;
+	for (i = 0; i < tam; i++)
+		vet_destino[i] = vet_origem[i];
 }
 
 void print_vetor(int* vet, long int tam)
@@ -83,4 +91,20 @@ void print_dados_sort(DadosSort dados)
 	printf("Variancia: %f\n", dados.num_comparacoes.variancia);
 	printf("DP: %f\n", dados.num_comparacoes.desvio_padrao);
 
+}
+
+void print_linha_tabela_dados_sort(DadosSort dados) {
+	printf(" X/: %.3f, V: %.3f, DP: %.3f | X/: %.3f, V: %.3f, DP: %.3f | X/: %.3f, V: %.3f, DP: %.3f |\n",
+			dados.tempo_de_execucao.media, dados.tempo_de_execucao.media, dados.tempo_de_execucao.desvio_padrao,
+			dados.num_trocas.media, dados.num_trocas.variancia, dados.num_trocas.desvio_padrao,
+			dados.num_comparacoes.media, dados.num_comparacoes.variancia, dados.num_comparacoes.desvio_padrao);
+}
+
+void print_file_dados_sort(FILE* file, DadosSort dados) {
+	fprintf(file, "[Tempo de execucao]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
+		dados.tempo_de_execucao.media, dados.tempo_de_execucao.variancia, dados.tempo_de_execucao.desvio_padrao);
+	fprintf(file, "[Comparacoes]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
+		dados.num_comparacoes.media, dados.num_comparacoes.variancia, dados.num_comparacoes.desvio_padrao);
+	fprintf(file, "[Trocas]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
+		dados.num_trocas.media, dados.num_trocas.variancia, dados.num_trocas.desvio_padrao);
 }
