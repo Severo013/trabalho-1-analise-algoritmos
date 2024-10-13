@@ -25,11 +25,11 @@ int main()
 	char filename_heap[50];
 	char filename_quick[50];
 
-	sprintf(filename_insertion, "insertion%d.txt", tam);
-	sprintf(filename_selection, "selection%d.txt", tam);
-	sprintf(filename_heap, "heap%d.txt", tam);
-	sprintf(filename_merge, "merge%d.txt", tam);
-	sprintf(filename_quick, "quick%d.txt", tam);
+	sprintf(filename_insertion, "insertion%ld.txt", tam);
+	sprintf(filename_selection, "selection%ld.txt", tam);
+	sprintf(filename_heap, "heap%ld.txt", tam);
+	sprintf(filename_merge, "merge%ld.txt", tam);
+	sprintf(filename_quick, "quick%ld.txt", tam);
 
 	FILE* fp_insertion = fopen(filename_insertion, "w+");
 	FILE* fp_selection = fopen(filename_selection, "w+");
@@ -77,7 +77,8 @@ int main()
 	}
 
 	for (i = 0; i < nAmostras; i++) {
-		printf("Amostra %d\n", i + 1);
+		printf("\n\n--------------------------------------------------------------------------------------\n");
+		printf("AMOSTRA %d\n", i + 1);
 		printf("\n **************** INSERTION **************** \n");
 		vet = gera_vetor(tam);
 		//printf("\n\nVetor gerado: ");
@@ -177,51 +178,43 @@ int main()
 	DadosSort estatisticas_heap = calcula_estatisticas(dados_heap, nAmostras);
 	DadosSort estatisticas_quick = calcula_estatisticas(dados_quick, nAmostras);
 
+	print_file_dados_sort(fp_insertion, estatisticas_insertion);
+	print_file_dados_sort(fp_selection, estatisticas_selection);
+	print_file_dados_sort(fp_merge, estatisticas_merge);
+	print_file_dados_sort(fp_heap, estatisticas_heap);
+	print_file_dados_sort(fp_quick, estatisticas_quick);
+	
+	// printf("\n\nInsertion:\n");
+	// print_dados_sort(estatisticas_insertion);
 
-	fprintf(fp_insertion, "[Tempo de execucao]\nMedia: %f\nVariancia: %f\nDP: %f\n\n", estatisticas_insertion.tempo_de_execucao.media, estatisticas_insertion.tempo_de_execucao.variancia, estatisticas_insertion.tempo_de_execucao.desvio_padrao);
-	fprintf(fp_insertion, "[Comparacoes]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_insertion.num_comparacoes.media, estatisticas_insertion.num_comparacoes.variancia, estatisticas_insertion.num_comparacoes.desvio_padrao);
-	fprintf(fp_insertion, "[Trocas]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_insertion.num_trocas.media, estatisticas_insertion.num_trocas.variancia, estatisticas_insertion.num_trocas.desvio_padrao);
+	// printf("\nSelection:\n");
+	// print_dados_sort(estatisticas_selection);
 
-	fprintf(fp_selection, "[Tempo de execucao]\nMedia: %f\nVariancia: %f\nDP: %f\n\n", estatisticas_selection.tempo_de_execucao.media, estatisticas_selection.tempo_de_execucao.variancia, estatisticas_selection.tempo_de_execucao.desvio_padrao);
-	fprintf(fp_selection, "[Comparacoes]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_selection.num_comparacoes.media, estatisticas_selection.num_comparacoes.variancia, estatisticas_selection.num_comparacoes.desvio_padrao);
-	fprintf(fp_selection, "[Trocas]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_selection.num_trocas.media, estatisticas_selection.num_trocas.variancia, estatisticas_selection.num_trocas.desvio_padrao);
+	// printf("\nMerge:\n");
+	// print_dados_sort(estatisticas_merge);
 
-	fprintf(fp_merge, "[Tempo de execucao]\nMedia: %f\nVariancia: %f\nDP: %f\n\n", estatisticas_merge.tempo_de_execucao.media, estatisticas_merge.tempo_de_execucao.variancia, estatisticas_merge.tempo_de_execucao.desvio_padrao);
-	fprintf(fp_merge, "[Comparacoes]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_merge.num_comparacoes.media, estatisticas_merge.num_comparacoes.variancia, estatisticas_merge.num_comparacoes.desvio_padrao);
-	fprintf(fp_merge, "[Trocas]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_merge.num_trocas.media, estatisticas_merge.num_trocas.variancia, estatisticas_merge.num_trocas.desvio_padrao);
+	// printf("\nHeap:\n");
+	// print_dados_sort(estatisticas_heap);
 
-	fprintf(fp_heap, "[Tempo de execucao]\nMedia: %f\nVariancia: %f\nDP: %f\n\n", estatisticas_heap.tempo_de_execucao.media, estatisticas_heap.tempo_de_execucao.variancia, estatisticas_heap.tempo_de_execucao.desvio_padrao);
-	fprintf(fp_heap, "[Comparacoes]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_heap.num_comparacoes.media, estatisticas_heap.num_comparacoes.variancia, estatisticas_heap.num_comparacoes.desvio_padrao);
-	fprintf(fp_heap, "[Trocas]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_heap.num_trocas.media, estatisticas_heap.num_trocas.variancia, estatisticas_heap.num_trocas.desvio_padrao);
+	// printf("\nQuick:\n");
+	// print_dados_sort(estatisticas_quick);
 
-	fprintf(fp_quick, "[Tempo de execucao]\nMedia: %f\nVariancia: %f\nDP: %f\n\n", estatisticas_quick.tempo_de_execucao.media, estatisticas_quick.tempo_de_execucao.variancia, estatisticas_quick.tempo_de_execucao.desvio_padrao);
-	fprintf(fp_quick, "[Comparacoes]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_quick.num_comparacoes.media, estatisticas_quick.num_comparacoes.variancia, estatisticas_quick.num_comparacoes.desvio_padrao);
-	fprintf(fp_quick, "[Trocas]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
-		estatisticas_quick.num_trocas.media, estatisticas_quick.num_trocas.variancia, estatisticas_quick.num_trocas.desvio_padrao);
+	printf("\n\n---------------------------------------------------------------------------------------------------------------------------\n");
+	printf("|                                                   ANALISE ESTATÍSTICA                                                   |\n");
+	printf("---------------------------------------------------------------------------------------------------------------------------\n");
+	printf("|        MÉTODO        |       TEMPO DE EXECUÇÃO        |           COMPARAÇÕES          |             TROCAS             |\n");
+	printf("---------------------------------------------------------------------------------------------------------------------------\n");
+	printf("|       Insertion      |"); print_linha_tabela_dados_sort(estatisticas_insertion);
+	printf("---------------------------------------------------------------------------------------------------------------------------\n");
+	printf("|       Selection      |"); print_linha_tabela_dados_sort(estatisticas_selection);
+	printf("---------------------------------------------------------------------------------------------------------------------------\n");
+	printf("|         Merge        |"); print_linha_tabela_dados_sort(estatisticas_merge);
+	printf("---------------------------------------------------------------------------------------------------------------------------\n");
+	printf("|         Heap         |"); print_linha_tabela_dados_sort(estatisticas_heap);
+	printf("---------------------------------------------------------------------------------------------------------------------------\n");
+	printf("|         Quick        |"); print_linha_tabela_dados_sort(estatisticas_quick);
+	printf("---------------------------------------------------------------------------------------------------------------------------\n");
 
-	printf("\n\nInsertion:\n");
-	print_dados_sort(estatisticas_insertion);
-
-	printf("\nSelection:\n");
-	print_dados_sort(estatisticas_selection);
-
-	printf("\nMerge:\n");
-	print_dados_sort(estatisticas_merge);
-
-	printf("\nHeap:\n");
-	print_dados_sort(estatisticas_heap);
-
-	printf("\nQuick:\n");
-	print_dados_sort(estatisticas_quick);
 
 	fclose(fp_selection);
 	fclose(fp_heap);

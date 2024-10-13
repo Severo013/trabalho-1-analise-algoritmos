@@ -18,7 +18,7 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_comparacoes.desvio_padrao = 0;
 	estats.num_comparacoes.variancia = 0;
 
-	// Calculos das médias
+	// Calculos das mï¿½dias
 	for (int i = 0; i < tamAmostra; i++) {
 		estats.tempo_de_execucao.media += dados[i].tempo_de_execucao;
 		estats.num_trocas.media += dados[i].num_trocas;
@@ -29,7 +29,7 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_trocas.media /= tamAmostra;
 	estats.num_comparacoes.media /= tamAmostra;
 
-	// Calculos das variâncias e desvios padrão 
+	// Calculos das variï¿½ncias e desvios padrï¿½o 
 	for (int i = 0; i < tamAmostra; i++) {
 		estats.tempo_de_execucao.variancia += pow((dados[i].tempo_de_execucao - estats.tempo_de_execucao.media), 2);
 		estats.num_trocas.variancia += pow((dados[i].num_trocas - estats.num_trocas.media), 2);
@@ -83,4 +83,20 @@ void print_dados_sort(DadosSort dados)
 	printf("Variancia: %f\n", dados.num_comparacoes.variancia);
 	printf("DP: %f\n", dados.num_comparacoes.desvio_padrao);
 
+}
+
+void print_linha_tabela_dados_sort(DadosSort dados) {
+	printf(" X/: %.3f, V: %.3f, DP: %.3f | X/: %.3f, V: %.3f, DP: %.3f | X/: %.3f, V: %.3f, DP: %.3f |\n",
+			dados.tempo_de_execucao.media, dados.tempo_de_execucao.media, dados.tempo_de_execucao.desvio_padrao,
+			dados.num_trocas.media, dados.num_trocas.variancia, dados.num_trocas.desvio_padrao,
+			dados.num_comparacoes.media, dados.num_comparacoes.variancia, dados.num_comparacoes.desvio_padrao);
+}
+
+void print_file_dados_sort(FILE* file, DadosSort dados) {
+	fprintf(file, "[Tempo de execucao]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
+		dados.tempo_de_execucao.media, dados.tempo_de_execucao.variancia, dados.tempo_de_execucao.desvio_padrao);
+	fprintf(file, "[Comparacoes]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
+		dados.num_comparacoes.media, dados.num_comparacoes.variancia, dados.num_comparacoes.desvio_padrao);
+	fprintf(file, "[Trocas]\nMedia: %f\nVariancia: %f\nDP: %f\n\n",
+		dados.num_trocas.media, dados.num_trocas.variancia, dados.num_trocas.desvio_padrao);
 }
