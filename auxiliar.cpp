@@ -18,7 +18,7 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_comparacoes.desvio_padrao = 0;
 	estats.num_comparacoes.variancia = 0;
 
-	// Calculos das m�dias
+	// Calculos das médias
 	for (int i = 0; i < tamAmostra; i++) {
 		estats.tempo_de_execucao.media += dados[i].tempo_de_execucao;
 		estats.num_trocas.media += dados[i].num_trocas;
@@ -29,7 +29,7 @@ DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra)
 	estats.num_trocas.media /= tamAmostra;
 	estats.num_comparacoes.media /= tamAmostra;
 
-	// Calculos das vari�ncias e desvios padr�o 
+	// Calculos das variâncias e desvios padrão 
 	for (int i = 0; i < tamAmostra; i++) {
 		estats.tempo_de_execucao.variancia += pow((dados[i].tempo_de_execucao - estats.tempo_de_execucao.media), 2);
 		estats.num_trocas.variancia += pow((dados[i].num_trocas - estats.num_trocas.media), 2);

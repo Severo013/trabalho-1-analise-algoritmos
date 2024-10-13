@@ -9,5 +9,5 @@ void print_dados_sort(DadosSort dados);
 void print_linha_tabela_dados_sort(DadosSort dados);
 void print_file_dados_sort(FILE* file, DadosSort dados);
 
-//============== Estat�sticas ==============//
+//============== Estatísticas ==============//
 DadosSort calcula_estatisticas(DadosAmostra* dados, int tamAmostra);
